@@ -9,17 +9,23 @@ const ProfilePage = () => {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
+    
+    // Kiểm tra kích thước file (ví dụ: giới hạn 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("File size too large. Please select an image under 5MB.");
+      return;
+    }
+  
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
-
+  
     reader.onload = async () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
       await updateProfile({ profilePic: base64Image });
     };
   };
+  
 
   return (
     <div className="h-screen pt-20">

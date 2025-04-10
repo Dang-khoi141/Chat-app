@@ -66,9 +66,28 @@ const useAuthStore = create((set)=>({
             toast.error(error.response?.data?.message || "Error during logout");
         }
     },
-    updateProfile: async (data)=>{
-        
-    },
+    updateProfile: async (data) => {
+        set({ isUpdatingProfile: true });
+        try {
+          const res = await axiosInstance.put("/auth/update-profile", data);
+          set({ authUser: res.data });
+          toast.success("Profile updated successfully");
+        } catch (error) {
+          console.log("Error in update profile:", error);
+          
+          // Xử lý lỗi an toàn hơn
+          if (error.response && error.response.data) {
+            toast.error(error.response.data.message || "Error updating profile");
+          } else if (error.message === "Network Error") {
+            toast.error("Network error. Please check your internet connection.");
+          } else {
+            toast.error("Error updating profile. Please try again.");
+          }
+        } finally {
+          set({ isUpdatingProfile: false });
+        }
+      }
+      
 }));
 
    

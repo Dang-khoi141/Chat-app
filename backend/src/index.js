@@ -13,8 +13,8 @@ const {connectDB} = require('./config/datavase')
 
 dotenv.config();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // xu ly cong ko the goi api
@@ -24,6 +24,12 @@ app.use(cors({
     credentials:true
 })
 );
+
+// xu ly kich thuoc anh 
+// Thêm vào sau dòng app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 
 app.use('/api/auth',authRoutes);
 app.use('/api/message',messageRoutes);
