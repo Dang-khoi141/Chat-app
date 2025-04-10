@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Camera, Mail, User } from "lucide-react";
+import { Camera, Mail, Phone, User } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
 
 const ProfilePage = () => {
@@ -75,19 +75,27 @@ const ProfilePage = () => {
             <div className="space-y-1.5">
               <div className="text-sm text-zinc-400 flex items-center gap-2">
                 <User className="w-4 h-4" />
-                Full Name
+                  Full Name
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.fullName}</p>
+            <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.fullName}</p>
+          </div>
+  
+          <div className="space-y-1.5">
+            <div className="text-sm text-zinc-400 flex items-center gap-2">
+              <Phone className="w-4 h-4" />
+                Phone
             </div>
+            <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.phone}</p>
+          </div>
 
-            <div className="space-y-1.5">
-              <div className="text-sm text-zinc-400 flex items-center gap-2">
+          <div className="space-y-1.5">
+            <div className="text-sm text-zinc-400 flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                Email Address
+                  Email Address
               </div>
               <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
+              </div>
             </div>
-          </div>
 
           <div className="mt-6 bg-base-300 rounded-xl p-6">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
