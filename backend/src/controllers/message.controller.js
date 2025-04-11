@@ -1,5 +1,5 @@
 const User = require("../models/user.model");
-const Message = require("../models/message.model");
+const Messages = require("../models/message.model");
 const { cloudinary } = require("../config/cloudinary");
 
 const getUserForsidebar = async(req,res)=>{
@@ -19,7 +19,7 @@ const getMessages = async(req,res)=>{
         const { id:userToChatId}= req.params;
         const myId = req.user._id;
 
-        const messages = await Message.find({
+        const messages = await Messages.find({
             $or:[
                 {senderId:myId, receiverId:userToChatId},
                 {senderId:userToChatId,receiverId:myId}
@@ -46,7 +46,7 @@ const sendMessage = async(req,res)=>{
          imageUrl = uploadResponse.secure_url;
        }
 
-       const newMessage = new Message({
+       const newMessage = new Messages({
         senderId,
         receiverId,
         text,
